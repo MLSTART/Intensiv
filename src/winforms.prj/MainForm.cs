@@ -41,7 +41,7 @@ namespace WinForms
 			_rdiTeeneger.CheckedChanged += _rdiKids_CheckedChanged1;
 			_rdiPeople.CheckedChanged += _rdiKids_CheckedChanged1;
 
-			openFileDialog.Filter = "Image|*.png; *.jpg|Video|*.avi; *.mp4";
+			_openFileDialog.Filter = "Image|*.png; *.jpg|Video|*.avi; *.mp4";
 
 			DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
 			DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
@@ -114,21 +114,22 @@ namespace WinForms
 			}
 		}
 
-
+		/// <summary>Открытие файла.</summary>
 		private void OpenFile(object sender, EventArgs e)
 		{
-			if(openFileDialog.ShowDialog() == DialogResult.Cancel) return;
+			if(_openFileDialog.ShowDialog() == DialogResult.Cancel) return;
 
-			_fileName = openFileDialog.FileName;
+			_fileName = _openFileDialog.FileName;
 
 			_txtFile.Text = _fileName;
 		}
 
+		/// <summary>Открытие директории.</summary>
 		private void OpenDirectory(object sender, EventArgs e)
 		{
-			if(folderBrowserDialog.ShowDialog() == DialogResult.Cancel) return;
+			if(_folderBrowserDialog.ShowDialog() == DialogResult.Cancel) return;
 
-			_path = folderBrowserDialog.SelectedPath;
+			_path = _folderBrowserDialog.SelectedPath;
 
 			_txtFile.Text = _path;
 
