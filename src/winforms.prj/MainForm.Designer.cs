@@ -48,8 +48,8 @@
 			this._txtEnterName = new System.Windows.Forms.TextBox();
 			this._txtName = new System.Windows.Forms.Label();
 			this._txtLastName = new System.Windows.Forms.Label();
-			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-			this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+			this._openFileDialog = new System.Windows.Forms.OpenFileDialog();
+			this._folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.dataGridView = new System.Windows.Forms.DataGridView();
 			this._pnlMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -285,9 +285,9 @@
 			this._txtLastName.TabIndex = 2;
 			this._txtLastName.Text = "Фамилия";
 			// 
-			// openFileDialog
+			// _openFileDialog
 			// 
-			this.openFileDialog.FileName = "openFileDialog1";
+			this._openFileDialog.FileName = "openFileDialog1";
 			// 
 			// dataGridView
 			// 
@@ -330,11 +330,11 @@
 		private System.Windows.Forms.ComboBox _cmbEnterHistory;
 		private System.Windows.Forms.Label _txtRus;
 		private System.Windows.Forms.ComboBox _cmbEnterRus;
-		private System.Windows.Forms.OpenFileDialog openFileDialog;
+		private System.Windows.Forms.OpenFileDialog _openFileDialog;
 		private System.Windows.Forms.Button _btnOpenFile;
 		private System.Windows.Forms.TextBox _txtFile;
 		private System.Windows.Forms.Button _btnOpenDirectory;
-		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+		private System.Windows.Forms.FolderBrowserDialog _folderBrowserDialog;
 		private System.Windows.Forms.DataGridView dataGridView;
 		private System.Windows.Forms.Button _btnSave;
 	}
