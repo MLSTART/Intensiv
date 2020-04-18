@@ -18,6 +18,7 @@ output/
 *.user
 *.docstates
 .vs/
+.idea/
 
 # Generated, Temporary & Cache Files
 *_i.c
