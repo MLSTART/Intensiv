@@ -19,6 +19,7 @@ output/
 *.docstates
 .vs/
 .idea/
+packages/
 
 # Generated, Temporary & Cache Files
 *_i.c
