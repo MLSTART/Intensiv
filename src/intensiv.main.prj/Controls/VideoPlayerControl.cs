@@ -2,6 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 
+using OpenCvSharp;
+using OpenCvSharp.Extensions;
+
 namespace Intensiv.Main.Controls
 {
 	/// <summary> Контрол видеопроигрывателя. </summary>
@@ -33,7 +36,18 @@ namespace Intensiv.Main.Controls
 
 			_videoPlayerControler.ChangeImage += OnChangeImage;
 
+			_videoPlayerControler.ChangeFrame += OnChangeFrame;
+
 			_opnFileDialog.Filter = "Image|*.png; *.jpg|Video|*.mp4; *.avi;";
+
+		}
+
+		private void OnChangeFrame(object sender, Mat image)
+		{
+
+			//Cv2.Resize(image, img, new OpenCvSharp.Size(_picVideo.Width, _picVideo.Height), 0, 0, InterpolationFlags.Cubic);
+			_picVideo.ImageIpl = image;
+			_picVideo.Refresh();
 
 		}
 
@@ -55,7 +69,7 @@ namespace Intensiv.Main.Controls
 			}
 			else if(_opnFileDialog.FilterIndex == (int)FilterType.Video)
 			{
-
+				_videoPlayerControler.OpenVideo(_opnFileDialog.FileName);
 			}
 
 		}
@@ -64,7 +78,6 @@ namespace Intensiv.Main.Controls
 		private void OnOpenFolderClick(object sender, EventArgs e)
 		{
 			if(_opnFolderDialog.ShowDialog() == DialogResult.Cancel) return;
-
 			_videoPlayerControler.OpenFolderWithImages(_opnFolderDialog.SelectedPath);
 		}
 
@@ -72,5 +85,16 @@ namespace Intensiv.Main.Controls
 		private void OnNextClick(object sender, EventArgs e) => _videoPlayerControler.NextImage();
 
 		#endregion
+
+		/// <summary> Вызывается при нажатие на кнопку предыдущая картинка. </summary>
+		private void OnBackClick(object sender, EventArgs e) => _videoPlayerControler.BackImage();
+
+
+		/// <summary> Вызывается при нажатие на кнопку START. </summary>
+		private void OnStartClick(object sender, EventArgs e) => _videoPlayerControler.PlayVideo();
+
+
+		/// <summary> Вызывается при нажатие на кнопку PAUSE. </summary>
+		private void _btnPause_Click(object sender, EventArgs e) => _videoPlayerControler.PauseVideo();
 	}
 }

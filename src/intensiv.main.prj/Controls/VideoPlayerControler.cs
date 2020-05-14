@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using OpenCvSharp;
 
 namespace Intensiv.Main.Controls
 {
@@ -17,12 +19,21 @@ namespace Intensiv.Main.Controls
 		private ProjectSettings _projectSettings;
 		private LogControler _logControler;
 
+		private VideoCapture _capture;
+		private int _fps;
+
+		private bool _pause;
+		private bool _stop;
+
 		#endregion
 
 		#region Event
 
 		/// <summary> Вызывается при  изменении картинки.</summary>
 		public event EventHandler<string> ChangeImage;
+
+		/// <summary> Вызывается при  изменении кадра.</summary>
+		public event EventHandler<Mat> ChangeFrame;
 
 		#endregion
 
@@ -35,6 +46,16 @@ namespace Intensiv.Main.Controls
 			if(ChangeImage != null)
 			{
 				ChangeImage.Invoke(null, path);
+			}
+		}
+
+		/// <summary> Обработчик события изменения кадра. </summary>
+		/// <param name="image"> кадр. </param>
+		private void OnChangeFrame(Mat image)
+		{
+			if(ChangeFrame != null)
+			{
+				ChangeFrame.Invoke(null, image);
 			}
 		}
 
@@ -53,7 +74,7 @@ namespace Intensiv.Main.Controls
 
 		#endregion
 
-		#region Methods
+		#region MethodsImage
 
 		/// <summary> Открыть одну картинку. </summary>
 		/// <param name="path">Путь к картинке. </param>
@@ -85,8 +106,16 @@ namespace Intensiv.Main.Controls
 			_curerntIamge = 0;
 			_countImage = _filesDirectory.Count();
 
-			AddImageOnControl(_listImage[_curerntIamge]);
-			_logControler.AddMessage($"{_curerntIamge} {_countImage}");
+			if(_countImage != 0)
+			{
+				AddImageOnControl(_listImage[_curerntIamge]);
+				_logControler.AddMessage($"{_curerntIamge} {_countImage}");
+			}
+			else
+			{
+				_logControler.AddMessage("Изображений не обнаружено!");
+			}
+
 		}
 
 		/// <summary> Добавить картинку на Контрол. </summary>
@@ -102,7 +131,7 @@ namespace Intensiv.Main.Controls
 			if(_listImage != null && _listImage.Count != 0)
 			{
 				_curerntIamge++;
-				if(_curerntIamge > _countImage)
+				if(_curerntIamge == _countImage)
 				{
 					_curerntIamge = 0;
 				}
@@ -111,6 +140,95 @@ namespace Intensiv.Main.Controls
 			}
 		}
 
+		/// <summary> Переход к предыдущей картинке. </summary>
+		public void BackImage()
+		{
+			if(_listImage != null && _listImage.Count != 0)
+			{
+				_curerntIamge--;
+				if(_curerntIamge <= 0)
+				{
+					_curerntIamge = _countImage-1;
+				}
+				AddImageOnControl(_listImage[_curerntIamge]);
+				_logControler.AddMessage($"{_curerntIamge} {_countImage}");
+			}
+		}
+
+
+		#endregion
+
+		#region MethodsVideo
+		/// <summary> открыть видео </summary>
+		/// <param name="path"></param>
+		public void OpenVideo(string path)
+		{
+			if(_capture != null) _capture.Dispose();
+
+			_capture = new VideoCapture(path);
+			_fps = (int)(1000 / _capture.Fps);
+			using(Mat image = new Mat())
+			{
+				_capture.Read(image);
+				if(!image.Empty())
+				{
+					NextFrameAddInVideoControl(image);
+					_pause = false;
+					PlayVideo();
+				}
+				else
+				{
+					_logControler.AddMessage("Некорректное видео!");
+				}
+
+			}
+		}
+
+		/// <summary> Воспроизвести видео. </summary>
+		public void PlayVideo()
+		{
+			if(_pause) _pause = false;
+
+			while(true)
+			{
+				if(_capture != null)
+				{
+
+					if(_pause) break;
+					using(Mat image = new Mat())
+					{
+						_capture.Read(image);
+						if(image.Empty())
+						{
+							_logControler.AddMessage("Конец видео!");
+							break;
+						}
+						NextFrameAddInVideoControl(image);
+						Cv2.WaitKey(_fps);
+					}
+
+				}
+			}
+		}
+
+		/// <summary> Остановить видео </summary>
+		public void StopVideo()
+		{
+
+		}
+
+		/// <summary> Пауза в видео </summary>
+		public void PauseVideo()
+		{
+			if(_capture != null) _pause = true;
+		}
+
+		/// <summary>Отобразить следующий кадр</summary>
+		/// <param name="image"></param>
+		private void NextFrameAddInVideoControl(Mat image)
+		{
+			OnChangeFrame(image);
+		}
 		#endregion
 	}
 }

@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			this._pnlImages = new System.Windows.Forms.Panel();
-			this._picVideo = new System.Windows.Forms.PictureBox();
 			this._pnlButControl = new System.Windows.Forms.Panel();
 			this._btnPause = new System.Windows.Forms.Button();
 			this._btnStop = new System.Windows.Forms.Button();
@@ -40,39 +39,27 @@
 			this._btnImageNext = new System.Windows.Forms.Button();
 			this._opnFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this._opnFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
+			this._picVideo = new OpenCvSharp.UserInterface.PictureBoxIpl();
 			this._pnlImages.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this._picVideo)).BeginInit();
 			this._pnlButControl.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this._picVideo)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// _pnlImages
 			// 
 			this._pnlImages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-			| System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this._pnlImages.Controls.Add(this._picVideo);
 			this._pnlImages.Location = new System.Drawing.Point(0, 0);
 			this._pnlImages.Name = "_pnlImages";
 			this._pnlImages.Size = new System.Drawing.Size(667, 445);
 			this._pnlImages.TabIndex = 0;
 			// 
-			// _picVideo
-			// 
-			this._picVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-			| System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
-			this._picVideo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this._picVideo.Location = new System.Drawing.Point(0, 0);
-			this._picVideo.Name = "_picVideo";
-			this._picVideo.Size = new System.Drawing.Size(667, 442);
-			this._picVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this._picVideo.TabIndex = 0;
-			this._picVideo.TabStop = false;
-			// 
 			// _pnlButControl
 			// 
 			this._pnlButControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-			| System.Windows.Forms.AnchorStyles.Right)));
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this._pnlButControl.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this._pnlButControl.Controls.Add(this._btnPause);
 			this._pnlButControl.Controls.Add(this._btnStop);
@@ -95,6 +82,7 @@
 			this._btnPause.TabIndex = 6;
 			this._btnPause.Text = "Pause";
 			this._btnPause.UseVisualStyleBackColor = true;
+			this._btnPause.Click += new System.EventHandler(this._btnPause_Click);
 			// 
 			// _btnStop
 			// 
@@ -126,6 +114,7 @@
 			this._btnImageBack.TabIndex = 3;
 			this._btnImageBack.Text = "<<";
 			this._btnImageBack.UseVisualStyleBackColor = true;
+			this._btnImageBack.Click += new System.EventHandler(this.OnBackClick);
 			// 
 			// _btnStart
 			// 
@@ -136,6 +125,7 @@
 			this._btnStart.TabIndex = 2;
 			this._btnStart.Text = "Start";
 			this._btnStart.UseVisualStyleBackColor = true;
+			this._btnStart.Click += new System.EventHandler(this.OnStartClick);
 			// 
 			// _btnOpenFile
 			// 
@@ -163,6 +153,19 @@
 			// 
 			this._opnFileDialog.FileName = "openFileDialog1";
 			// 
+			// _picVideo
+			// 
+			this._picVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this._picVideo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this._picVideo.Location = new System.Drawing.Point(0, 0);
+			this._picVideo.Name = "_picVideo";
+			this._picVideo.Size = new System.Drawing.Size(667, 442);
+			this._picVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this._picVideo.TabIndex = 0;
+			this._picVideo.TabStop = false;
+			// 
 			// VideoPlayerControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -172,8 +175,8 @@
 			this.Name = "VideoPlayerControl";
 			this.Size = new System.Drawing.Size(667, 514);
 			this._pnlImages.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this._picVideo)).EndInit();
 			this._pnlButControl.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this._picVideo)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -181,7 +184,6 @@
 		#endregion
 
 		private System.Windows.Forms.Panel _pnlImages;
-		private System.Windows.Forms.PictureBox _picVideo;
 		private System.Windows.Forms.Panel _pnlButControl;
 		private System.Windows.Forms.Button _btnPause;
 		private System.Windows.Forms.Button _btnStop;
@@ -192,5 +194,6 @@
 		private System.Windows.Forms.Button _btnImageNext;
 		private System.Windows.Forms.OpenFileDialog _opnFileDialog;
 		private System.Windows.Forms.FolderBrowserDialog _opnFolderDialog;
+		private OpenCvSharp.UserInterface.PictureBoxIpl _picVideo;
 	}
 }

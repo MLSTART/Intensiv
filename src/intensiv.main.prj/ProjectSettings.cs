@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Xml.Linq;
 
 using Intensiv.Main.Controls;
@@ -32,7 +33,11 @@ namespace Intensiv.Main
 		{
 			_logControler = logControler;
 
-			LoadXML();
+			if(File.Exists(_pathXML))
+			{
+				LoadXML();
+			}
+			
 		}
 
 		#endregion
@@ -78,6 +83,7 @@ namespace Intensiv.Main
 			IsUnderCatalog = bool.Parse(xdoc.Root.Element("IsUnderCatalog").Value);
 
 			_logControler.AddMessage($"{IsDetector} - {IsUnderCatalog}");
+
 		}
 
 		#endregion
