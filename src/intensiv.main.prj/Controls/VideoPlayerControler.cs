@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using OpenCvSharp;
 
 namespace Intensiv.Main.Controls
@@ -161,7 +162,7 @@ namespace Intensiv.Main.Controls
 		#region MethodsVideo
 		/// <summary> открыть видео </summary>
 		/// <param name="path"></param>
-		public void OpenVideo(string path)
+		public async Task OpenVideo(string path)
 		{
 			if(_capture != null) _capture.Dispose();
 
@@ -172,9 +173,9 @@ namespace Intensiv.Main.Controls
 				_capture.Read(image);
 				if(!image.Empty())
 				{
-					NextFrameAddInVideoControl(image);
+					await NextFrameAddInVideoControl(image);
 					_pause = false;
-					PlayVideo();
+					await PlayVideo();
 				}
 				else
 				{
@@ -185,7 +186,7 @@ namespace Intensiv.Main.Controls
 		}
 
 		/// <summary> Воспроизвести видео. </summary>
-		public void PlayVideo()
+		public async Task PlayVideo()
 		{
 			if(_pause) _pause = false;
 
@@ -203,8 +204,9 @@ namespace Intensiv.Main.Controls
 							_logControler.AddMessage("Конец видео!");
 							break;
 						}
-						NextFrameAddInVideoControl(image);
-						Cv2.WaitKey(_fps);
+						await NextFrameAddInVideoControl(image);
+						//Cv2.WaitKey(_fps);
+						await Task.Delay(1);
 					}
 
 				}
@@ -212,20 +214,20 @@ namespace Intensiv.Main.Controls
 		}
 
 		/// <summary> Остановить видео </summary>
-		public void StopVideo()
+		public async Task StopVideo()
 		{
 
 		}
 
 		/// <summary> Пауза в видео </summary>
-		public void PauseVideo()
+		public async Task PauseVideo()
 		{
 			if(_capture != null) _pause = true;
 		}
 
 		/// <summary>Отобразить следующий кадр</summary>
 		/// <param name="image"></param>
-		private void NextFrameAddInVideoControl(Mat image)
+		private async Task NextFrameAddInVideoControl(Mat image)
 		{
 			OnChangeFrame(image);
 		}
