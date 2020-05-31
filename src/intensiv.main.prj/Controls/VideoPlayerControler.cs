@@ -26,6 +26,10 @@ namespace Intensiv.Main.Controls
 		private bool _pause;
 		private bool _stop;
 
+		private Detector _detector;
+
+		
+
 		#endregion
 
 		#region Event
@@ -48,6 +52,8 @@ namespace Intensiv.Main.Controls
 			{
 				ChangeImage.Invoke(null, path);
 			}
+
+
 		}
 
 		/// <summary> Обработчик события изменения кадра. </summary>
@@ -71,6 +77,10 @@ namespace Intensiv.Main.Controls
 		{
 			_projectSettings = projectSettings;
 			_logControler = logControler;
+
+			_detector = new Detector();
+
+		
 		}
 
 		#endregion
@@ -124,6 +134,19 @@ namespace Intensiv.Main.Controls
 		private void AddImageOnControl(string path)
 		{
 			OnChangeImage(path);
+			if (_projectSettings.IsDetector)
+			{
+				var items = _detector.GetInfoAboutDetection(path);
+				for (int i = 0; i < items.Count(); i++)
+				{
+					_logControler.AddMessage($@"Type of object: {items.ElementAt(i).Type.ToString()}");
+					_logControler.AddMessage($@"Confidence: {items.ElementAt(i).Confidence.ToString()}");
+				}
+
+			}
+
+
+
 		}
 
 		/// <summary> Переход к следующей картинке. </summary>

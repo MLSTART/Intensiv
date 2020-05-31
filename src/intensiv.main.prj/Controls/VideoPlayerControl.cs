@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+using System.Linq;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 
@@ -15,6 +15,8 @@ namespace Intensiv.Main.Controls
 		private LogControler _logControler;
 		private VideoPlayerControler _videoPlayerControler;
 		private ProjectSettings _projectSettings;
+
+		private Detector _detector;
 
 		#endregion
 
@@ -40,6 +42,8 @@ namespace Intensiv.Main.Controls
 
 			_opnFileDialog.Filter = "Image|*.png; *.jpg|Video|*.mp4; *.avi;";
 
+			_detector = new Detector();
+
 		}
 
 		private void OnChangeFrame(object sender, Mat image)
@@ -56,7 +60,19 @@ namespace Intensiv.Main.Controls
 		#region Handler
 
 		/// <summary> Вызывается при необходимости изменить картинку на панели. </summary>
-		private void OnChangeImage(object sender, string path) => _picVideo.Image = Image.FromFile(path);
+		private void OnChangeImage(object sender, string path)
+		{
+			//_picVideo.Image = Image.FromFile(path);
+			if (_projectSettings.IsDetector)
+			{
+				_picVideo.Image = _detector.Detect(path).ToBitmap();
+			}
+			else
+			{
+				_picVideo.Image = Image.FromFile(path);
+			}
+			
+		}
 
 		/// <summary> Вызывается по нажатию на кнопку открыть файл. </summary>
 		private void OnOpenFileClick(object sender, EventArgs e)
