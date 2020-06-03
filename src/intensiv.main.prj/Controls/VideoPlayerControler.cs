@@ -196,7 +196,7 @@ namespace Intensiv.Main.Controls
 				_capture.Read(image);
 				if(!image.Empty())
 				{
-					await NextFrameAddInVideoControl(image);
+					await NextFrameAddInVideoControlAsync(image);
 					_pause = false;
 					await PlayVideo();
 				}
@@ -208,7 +208,7 @@ namespace Intensiv.Main.Controls
 			}
 		}
 
-		/// <summary> Воспроизвести видео. </summary>
+		/// <summary> Воспроизвести видео асинхронно. </summary>
 		public async Task PlayVideo()
 		{
 			if(_pause) _pause = false;
@@ -227,7 +227,7 @@ namespace Intensiv.Main.Controls
 							_logControler.AddMessage("Конец видео!");
 							break;
 						}
-						await NextFrameAddInVideoControl(image);
+						await NextFrameAddInVideoControlAsync(image);
 						//Cv2.WaitKey(_fps);
 						await Task.Delay(1);
 					}
@@ -237,20 +237,20 @@ namespace Intensiv.Main.Controls
 		}
 
 		/// <summary> Остановить видео </summary>
-		public async Task StopVideo()
+		public async Task StopVideoAsync()
 		{
 
 		}
 
 		/// <summary> Пауза в видео </summary>
-		public async Task PauseVideo()
+		public async Task PauseVideoAsync()
 		{
 			if(_capture != null) _pause = true;
 		}
 
 		/// <summary>Отобразить следующий кадр</summary>
 		/// <param name="image"></param>
-		private async Task NextFrameAddInVideoControl(Mat image)
+		private async Task NextFrameAddInVideoControlAsync(Mat image)
 		{
 			OnChangeFrame(image);
 		}

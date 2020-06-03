@@ -111,6 +111,6 @@ namespace Intensiv.Main.Controls
 
 
 		/// <summary> Вызывается при нажатие на кнопку PAUSE. </summary>
-		private void _btnPause_Click(object sender, EventArgs e) => _videoPlayerControler.PauseVideo();
+		private void _btnPause_Click(object sender, EventArgs e) => _videoPlayerControler.PauseVideoAsync();
 	}
 }
