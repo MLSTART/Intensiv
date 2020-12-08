@@ -1,4 +1,4 @@
-﻿namespace Intensiv.Main.Controls
+﻿namespace Intensiv.Main
 {
 	partial class LogControl
 	{
@@ -36,25 +36,25 @@
 			this._txtLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this._txtLog.Location = new System.Drawing.Point(0, 3);
+			this._txtLog.Location = new System.Drawing.Point(3, 3);
 			this._txtLog.Name = "_txtLog";
-			this._txtLog.ReadOnly = true;
-			this._txtLog.Size = new System.Drawing.Size(867, 144);
-			this._txtLog.TabIndex = 1;
+			this._txtLog.Size = new System.Drawing.Size(927, 131);
+			this._txtLog.TabIndex = 0;
 			this._txtLog.Text = "";
 			// 
 			// LogControl
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.Controls.Add(this._txtLog);
 			this.Name = "LogControl";
-			this.Size = new System.Drawing.Size(867, 150);
+			this.Size = new System.Drawing.Size(933, 140);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
+
 		private System.Windows.Forms.RichTextBox _txtLog;
 	}
 }

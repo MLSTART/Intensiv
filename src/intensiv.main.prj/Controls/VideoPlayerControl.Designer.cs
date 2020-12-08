@@ -1,4 +1,4 @@
-﻿namespace Intensiv.Main.Controls
+﻿namespace Intensiv.Main
 {
 	partial class VideoPlayerControl
 	{
@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this._pnlImages = new System.Windows.Forms.Panel();
+			this._picVideo = new System.Windows.Forms.PictureBox();
 			this._pnlButControl = new System.Windows.Forms.Panel();
 			this._btnPause = new System.Windows.Forms.Button();
 			this._btnStop = new System.Windows.Forms.Button();
@@ -39,10 +40,9 @@
 			this._btnImageNext = new System.Windows.Forms.Button();
 			this._opnFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this._opnFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this._picVideo = new OpenCvSharp.UserInterface.PictureBoxIpl();
 			this._pnlImages.SuspendLayout();
-			this._pnlButControl.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this._picVideo)).BeginInit();
+			this._pnlButControl.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// _pnlImages
@@ -52,9 +52,24 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this._pnlImages.Controls.Add(this._picVideo);
 			this._pnlImages.Location = new System.Drawing.Point(0, 0);
+			this._pnlImages.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this._pnlImages.Name = "_pnlImages";
-			this._pnlImages.Size = new System.Drawing.Size(667, 445);
+			this._pnlImages.Size = new System.Drawing.Size(926, 481);
 			this._pnlImages.TabIndex = 0;
+			// 
+			// _picVideo
+			// 
+			this._picVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this._picVideo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this._picVideo.Location = new System.Drawing.Point(0, 0);
+			this._picVideo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this._picVideo.Name = "_picVideo";
+			this._picVideo.Size = new System.Drawing.Size(926, 471);
+			this._picVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this._picVideo.TabIndex = 0;
+			this._picVideo.TabStop = false;
 			// 
 			// _pnlButControl
 			// 
@@ -68,28 +83,30 @@
 			this._pnlButControl.Controls.Add(this._btnStart);
 			this._pnlButControl.Controls.Add(this._btnOpenFile);
 			this._pnlButControl.Controls.Add(this._btnImageNext);
-			this._pnlButControl.Location = new System.Drawing.Point(0, 437);
+			this._pnlButControl.Location = new System.Drawing.Point(0, 471);
+			this._pnlButControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this._pnlButControl.Name = "_pnlButControl";
-			this._pnlButControl.Size = new System.Drawing.Size(667, 77);
+			this._pnlButControl.Size = new System.Drawing.Size(926, 96);
 			this._pnlButControl.TabIndex = 1;
 			// 
 			// _btnPause
 			// 
 			this._btnPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this._btnPause.Location = new System.Drawing.Point(579, 30);
+			this._btnPause.Location = new System.Drawing.Point(816, 38);
+			this._btnPause.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this._btnPause.Name = "_btnPause";
-			this._btnPause.Size = new System.Drawing.Size(75, 23);
+			this._btnPause.Size = new System.Drawing.Size(94, 29);
 			this._btnPause.TabIndex = 6;
 			this._btnPause.Text = "Pause";
 			this._btnPause.UseVisualStyleBackColor = true;
-			this._btnPause.Click += new System.EventHandler(this._btnPause_Click);
 			// 
 			// _btnStop
 			// 
 			this._btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this._btnStop.Location = new System.Drawing.Point(498, 29);
+			this._btnStop.Location = new System.Drawing.Point(715, 36);
+			this._btnStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this._btnStop.Name = "_btnStop";
-			this._btnStop.Size = new System.Drawing.Size(75, 23);
+			this._btnStop.Size = new System.Drawing.Size(94, 29);
 			this._btnStop.TabIndex = 5;
 			this._btnStop.Text = "Stop";
 			this._btnStop.UseVisualStyleBackColor = true;
@@ -97,86 +114,75 @@
 			// _btnOpenFolder
 			// 
 			this._btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this._btnOpenFolder.Location = new System.Drawing.Point(3, 43);
+			this._btnOpenFolder.Location = new System.Drawing.Point(4, 54);
+			this._btnOpenFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this._btnOpenFolder.Name = "_btnOpenFolder";
-			this._btnOpenFolder.Size = new System.Drawing.Size(144, 23);
+			this._btnOpenFolder.Size = new System.Drawing.Size(180, 29);
 			this._btnOpenFolder.TabIndex = 4;
 			this._btnOpenFolder.Text = "Открыть папку";
 			this._btnOpenFolder.UseVisualStyleBackColor = true;
-			this._btnOpenFolder.Click += new System.EventHandler(this.OnOpenFolderClick);
 			// 
 			// _btnImageBack
 			// 
 			this._btnImageBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this._btnImageBack.Location = new System.Drawing.Point(154, 30);
+			this._btnImageBack.Location = new System.Drawing.Point(192, 38);
+			this._btnImageBack.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this._btnImageBack.Name = "_btnImageBack";
-			this._btnImageBack.Size = new System.Drawing.Size(75, 23);
+			this._btnImageBack.Size = new System.Drawing.Size(94, 29);
 			this._btnImageBack.TabIndex = 3;
 			this._btnImageBack.Text = "<<";
 			this._btnImageBack.UseVisualStyleBackColor = true;
-			this._btnImageBack.Click += new System.EventHandler(this.OnBackClick);
 			// 
 			// _btnStart
 			// 
 			this._btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this._btnStart.Location = new System.Drawing.Point(417, 29);
+			this._btnStart.Location = new System.Drawing.Point(612, 36);
+			this._btnStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this._btnStart.Name = "_btnStart";
-			this._btnStart.Size = new System.Drawing.Size(75, 23);
+			this._btnStart.Size = new System.Drawing.Size(94, 29);
 			this._btnStart.TabIndex = 2;
 			this._btnStart.Text = "Start";
 			this._btnStart.UseVisualStyleBackColor = true;
-			this._btnStart.Click += new System.EventHandler(this.OnStartClick);
+			this._btnStart.Click += new System.EventHandler(this._btnStart_Click);
 			// 
 			// _btnOpenFile
 			// 
 			this._btnOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this._btnOpenFile.Location = new System.Drawing.Point(3, 14);
+			this._btnOpenFile.Location = new System.Drawing.Point(4, 18);
+			this._btnOpenFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this._btnOpenFile.Name = "_btnOpenFile";
-			this._btnOpenFile.Size = new System.Drawing.Size(144, 23);
+			this._btnOpenFile.Size = new System.Drawing.Size(180, 29);
 			this._btnOpenFile.TabIndex = 1;
 			this._btnOpenFile.Text = "Открыть файл";
 			this._btnOpenFile.UseVisualStyleBackColor = true;
-			this._btnOpenFile.Click += new System.EventHandler(this.OnOpenFileClick);
 			// 
 			// _btnImageNext
 			// 
 			this._btnImageNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this._btnImageNext.Location = new System.Drawing.Point(235, 30);
+			this._btnImageNext.Location = new System.Drawing.Point(294, 38);
+			this._btnImageNext.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this._btnImageNext.Name = "_btnImageNext";
-			this._btnImageNext.Size = new System.Drawing.Size(75, 23);
+			this._btnImageNext.Size = new System.Drawing.Size(94, 29);
 			this._btnImageNext.TabIndex = 0;
 			this._btnImageNext.Text = ">>";
 			this._btnImageNext.UseVisualStyleBackColor = true;
-			this._btnImageNext.Click += new System.EventHandler(this.OnNextClick);
 			// 
 			// _opnFileDialog
 			// 
 			this._opnFileDialog.FileName = "openFileDialog1";
 			// 
-			// _picVideo
-			// 
-			this._picVideo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this._picVideo.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this._picVideo.Location = new System.Drawing.Point(0, 0);
-			this._picVideo.Name = "_picVideo";
-			this._picVideo.Size = new System.Drawing.Size(667, 442);
-			this._picVideo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this._picVideo.TabIndex = 0;
-			this._picVideo.TabStop = false;
-			// 
 			// VideoPlayerControl
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.Controls.Add(this._pnlButControl);
 			this.Controls.Add(this._pnlImages);
+			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.Name = "VideoPlayerControl";
-			this.Size = new System.Drawing.Size(667, 514);
+			this.Size = new System.Drawing.Size(926, 568);
 			this._pnlImages.ResumeLayout(false);
-			this._pnlButControl.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this._picVideo)).EndInit();
+			this._pnlButControl.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -194,6 +200,6 @@
 		private System.Windows.Forms.Button _btnImageNext;
 		private System.Windows.Forms.OpenFileDialog _opnFileDialog;
 		private System.Windows.Forms.FolderBrowserDialog _opnFolderDialog;
-		private OpenCvSharp.UserInterface.PictureBoxIpl _picVideo;
+		private System.Windows.Forms.PictureBox _picVideo;
 	}
 }

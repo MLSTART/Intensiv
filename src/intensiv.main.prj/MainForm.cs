@@ -1,49 +1,54 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using Intensiv.Main.Controls;
 
 namespace Intensiv.Main
 {
 	public partial class MainForm : Form
 	{
-		#region Data
-
 		private LogControl _log;
-		private SettingControl _setting;
+		private SettingsControl _setting;
 		private VideoPlayerControl _videoPlayer;
 
-		private LogControler _logControler;
-		private VideoPlayerControler _videoPlayerControler;
-		private ProjectSettings _projectSettings;
+		private LogController _logController;
+		private VideoPlayerController _videoPlayerController;
 
-		#endregion
-
-		#region .ctor
-
-		/// <summary> Запуск главной формы. </summary>
-		public MainForm(
-			LogControler logControler,
-			VideoPlayerControler videoPlayerControler,
-			ProjectSettings projectSettings)
+		public MainForm(LogController logController,
+			VideoPlayerController videoPlayerController,
+			RecognitionController recognitionController,
+			DetectorProvider detectorProvider,
+			SettingsControl settingsControl)
 		{
 			InitializeComponent();
 
+			_logController = logController;
+			_videoPlayerController = videoPlayerController;
 
-			_logControler = logControler;
-			_videoPlayerControler = videoPlayerControler;
-			_projectSettings = projectSettings;
-
-			_log = new LogControl(_logControler);
-			_setting = new SettingControl(_logControler,_projectSettings);
-			_videoPlayer = new VideoPlayerControl(_logControler, _videoPlayerControler,_projectSettings);
+			_log = new LogControl(_logController);
+			_setting = settingsControl;
+			_videoPlayer = new VideoPlayerControl(_logController, _videoPlayerController, recognitionController);
 
 			_pnlLog.Controls.Add(_log);
-			_pnlSetting.Controls.Add(_setting);
-			_pnlVideoPlayer.Controls.Add(_videoPlayer);
-			
+			_pnlSettings.Controls.Add(_setting);
+			_pnlVideo.Controls.Add(_videoPlayer);
+
+			_logController.AddMessage("Старт программы.");
 		}
 
-		#endregion
-
+		protected override void Dispose(bool disposing)
+		{
+			if(disposing && (components != null))
+			{
+				components.Dispose();
+				_setting.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 	}
 }

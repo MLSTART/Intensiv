@@ -1,22 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Text;
 using System.Windows.Forms;
-using System.Linq;
-using OpenCvSharp;
-using OpenCvSharp.Extensions;
 
-namespace Intensiv.Main.Controls
+namespace Intensiv.Main
 {
-	/// <summary> Контрол видеопроигрывателя. </summary>
 	public partial class VideoPlayerControl : UserControl
 	{
 		#region Data
 
-		private LogControler _logControler;
-		private VideoPlayerControler _videoPlayerControler;
-		private ProjectSettings _projectSettings;
-
-		private Detector _detector;
+		private readonly LogController _logController;
+		private readonly VideoPlayerController _videoPlayerController;
+		private readonly RecognitionController _recognitionController;
 
 		#endregion
 
@@ -24,93 +22,30 @@ namespace Intensiv.Main.Controls
 
 		/// <summary> Создает контрол видеопроигрывателя. </summary>
 		public VideoPlayerControl(
-			LogControler logControler,
-			VideoPlayerControler videoPlayerControler,
-			ProjectSettings projectSettings)
+			LogController logController,
+			VideoPlayerController videoPlayerControler,
+			RecognitionController recognitionController)
 		{
 			InitializeComponent();
 
 			Dock = DockStyle.Fill;
 
-			_logControler = logControler;
-			_videoPlayerControler = videoPlayerControler;
-			_projectSettings = projectSettings;
-
-			_videoPlayerControler.ChangeImage += OnChangeImage;
-
-			_videoPlayerControler.ChangeFrame += OnChangeFrame;
-
-			_opnFileDialog.Filter = "Image|*.png; *.jpg|Video|*.mp4; *.avi;";
-
-			_detector = new Detector();
-
-		}
-
-		private void OnChangeFrame(object sender, Mat image)
-		{
-
-			//Cv2.Resize(image, img, new OpenCvSharp.Size(_picVideo.Width, _picVideo.Height), 0, 0, InterpolationFlags.Cubic);
-			_picVideo.ImageIpl = image;
-			_picVideo.Refresh();
-
+			_logController = logController;
+			_videoPlayerController = videoPlayerControler;
+			_recognitionController = recognitionController;
 		}
 
 		#endregion
 
-		#region Handler
-
-		/// <summary> Вызывается при необходимости изменить картинку на панели. </summary>
-		private void OnChangeImage(object sender, string path)
+		private void _btnStart_Click(object sender, EventArgs e)
 		{
-			//_picVideo.Image = Image.FromFile(path);
-			if (_projectSettings.IsDetector)
-			{
-				_picVideo.Image = _detector.Detect(path).ToBitmap();
-			}
-			else
-			{
-				_picVideo.Image = Image.FromFile(path);
-			}
-			
+			_videoPlayerController.OnFrameReaded += OnVideoPlayerControllerOnFrameReaded;
+			_videoPlayerController.Start();
 		}
 
-		/// <summary> Вызывается по нажатию на кнопку открыть файл. </summary>
-		private void OnOpenFileClick(object sender, EventArgs e)
+		private void OnVideoPlayerControllerOnFrameReaded(object sender, BitmapData args)
 		{
-			if(_opnFileDialog.ShowDialog() == DialogResult.Cancel) return;
-
-			if(_opnFileDialog.FilterIndex == (int)FilterType.Image)
-			{
-				_videoPlayerControler.OpenImage(_opnFileDialog.FileName);
-			}
-			else if(_opnFileDialog.FilterIndex == (int)FilterType.Video)
-			{
-				_videoPlayerControler.OpenVideo(_opnFileDialog.FileName);
-			}
-
+			_recognitionController.Detect(args);
 		}
-
-		/// <summary>Вызывается при нажатии открыть папку. </summary>
-		private void OnOpenFolderClick(object sender, EventArgs e)
-		{
-			if(_opnFolderDialog.ShowDialog() == DialogResult.Cancel) return;
-			_videoPlayerControler.OpenFolderWithImages(_opnFolderDialog.SelectedPath);
-		}
-
-		/// <summary> Вызывается при нажатие на кнопку следующая картинка. </summary>
-		private void OnNextClick(object sender, EventArgs e) => _videoPlayerControler.NextImage();
-
-		#endregion
-
-		/// <summary> Вызывается при нажатие на кнопку предыдущая картинка. </summary>
-		private void OnBackClick(object sender, EventArgs e) => _videoPlayerControler.BackImage();
-
-
-		/// <summary> Вызывается при нажатие на кнопку START. </summary>
-		private void OnStartClick(object sender, EventArgs e) => _videoPlayerControler.PlayVideo();
-
-
-		/// <summary> Вызывается при нажатие на кнопку PAUSE. </summary>
-		private void _btnPause_Click(object sender, EventArgs e) => _videoPlayerControler.PauseVideoAsync();
 	}
 }

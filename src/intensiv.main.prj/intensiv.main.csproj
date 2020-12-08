@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props" Condition="Exists('..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -58,32 +57,30 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Alturos.Yolo, Version=2.6.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Alturos.Yolo.2.6.4\lib\net461\Alturos.Yolo.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac, Version=5.1.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.5.1.4\lib\net461\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.1.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net461\OpenCvSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenCvSharp.Blob, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net461\OpenCvSharp.Blob.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net461\OpenCvSharp.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenCvSharp.UserInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net461\OpenCvSharp.UserInterface.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -99,18 +96,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\RecognitionController.cs" />
+    <Compile Include="Controllers\VideoPlayerController.cs" />
     <Compile Include="Controls\LogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\LogControl.Designer.cs">
       <DependentUpon>LogControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LogControler.cs" />
-    <Compile Include="Controls\SettingControl.cs">
+    <Compile Include="Controls\SettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\SettingControl.Designer.cs">
-      <DependentUpon>SettingControl.cs</DependentUpon>
+    <Compile Include="Controls\SettingsControl.Designer.cs">
+      <DependentUpon>SettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\VideoPlayerControl.cs">
       <SubType>UserControl</SubType>
@@ -118,25 +117,27 @@
     <Compile Include="Controls\VideoPlayerControl.Designer.cs">
       <DependentUpon>VideoPlayerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\VideoPlayerControler.cs" />
-    <Compile Include="Detector.cs" />
-    <Compile Include="FilterType.cs" />
+    <Compile Include="Detetction\DarknetDetector.cs" />
+    <Compile Include="Detetction\DarknetDetectorFactory.cs" />
+    <Compile Include="Detetction\DetectorProvider.cs" />
+    <Compile Include="Detetction\DetectorResult.cs" />
+    <Compile Include="Detetction\IDetector.cs" />
+    <Compile Include="Detetction\IDetectorFactory.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Detetction\OpenVinoDetector.cs" />
+    <Compile Include="Detetction\OpenVinoDetectorFactory.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="ProjectSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ModuleWinForm.cs" />
-    <Compile Include="Services\RegisterServices.cs" />
     <EmbeddedResource Include="Controls\LogControl.resx">
       <DependentUpon>LogControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\SettingControl.resx">
-      <DependentUpon>SettingControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SettingsControl.resx">
+      <DependentUpon>SettingsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\VideoPlayerControl.resx">
       <DependentUpon>VideoPlayerControl.cs</DependentUpon>
@@ -154,6 +155,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -168,13 +170,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props'))" />
-    <Error Condition="!Exists('..\packages\Alturos.Yolo.2.6.4\build\net461\Alturos.Yolo.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Alturos.Yolo.2.6.4\build\net461\Alturos.Yolo.targets'))" />
-  </Target>
-  <Import Project="..\packages\Alturos.Yolo.2.6.4\build\net461\Alturos.Yolo.targets" Condition="Exists('..\packages\Alturos.Yolo.2.6.4\build\net461\Alturos.Yolo.targets')" />
 </Project>
