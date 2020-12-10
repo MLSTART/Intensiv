@@ -14,6 +14,7 @@ namespace Intensiv.Main
 
 		private readonly LogController _logController;
 		private readonly VideoPlayerController _videoPlayerController;
+		private readonly RecognitionController _recognitionController;
 
 		#endregion
 
@@ -22,7 +23,8 @@ namespace Intensiv.Main
 		/// <summary> Создает контрол видеопроигрывателя. </summary>
 		public VideoPlayerControl(
 			LogController logController, 
-			VideoPlayerController videoPlayerControler)
+			VideoPlayerController videoPlayerControler,
+			RecognitionController recognitionController)
 		{
 			InitializeComponent();
 
@@ -30,8 +32,23 @@ namespace Intensiv.Main
 
 			_logController = logController;
 			_videoPlayerController = videoPlayerControler;
+			_recognitionController = recognitionController;
 		}
 
 		#endregion
+
+		private void _btnStart_Click(object sender, EventArgs e)
+		{
+			_logController.AddMessage("Started");
+			_recognitionController.StartRecognition();
+			_videoPlayerController.Start();
+		}
+
+		private void _btnStop_Click(object sender, EventArgs e)
+		{
+			_logController.AddMessage("Stopped");
+			_videoPlayerController.Stop();
+			_recognitionController.StopRecognition();
+		}
 	}
 }

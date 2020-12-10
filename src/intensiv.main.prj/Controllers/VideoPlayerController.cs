@@ -30,5 +30,9 @@ namespace Intensiv.Main
 		public void Start()
 		{
 		}
+
+		public void Stop()
+		{
+		}
 	}
 }

@@ -105,6 +105,7 @@
 			this._btnStop.TabIndex = 5;
 			this._btnStop.Text = "Stop";
 			this._btnStop.UseVisualStyleBackColor = true;
+			this._btnStop.Click += new System.EventHandler(this._btnStop_Click);
 			// 
 			// _btnOpenFolder
 			// 
@@ -135,6 +136,7 @@
 			this._btnStart.TabIndex = 2;
 			this._btnStart.Text = "Start";
 			this._btnStart.UseVisualStyleBackColor = true;
+			this._btnStart.Click += new System.EventHandler(this._btnStart_Click);
 			// 
 			// _btnOpenFile
 			// 
