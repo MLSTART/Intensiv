@@ -10,6 +10,9 @@ namespace Intensiv.Main
 {
 	static class Program
 	{
+		private static LogController _logController = new LogController();
+		private static VideoPlayerController _videoPlayerController = new VideoPlayerController(_logController);
+
 		/// <summary>
 		///  The main entry point for the application.
 		/// </summary>
@@ -18,58 +21,7 @@ namespace Intensiv.Main
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-
-			using(var container = CreateContainer())
-			{
-				Application.Run(container.Resolve<MainForm>());
-			}
-		}
-
-		private static IContainer CreateContainer()
-		{
-			var builder = new ContainerBuilder();
-
-			builder
-				.RegisterType<DetectorProvider>()
-				.SingleInstance()
-				.AsSelf();
-
-			builder
-				.RegisterType<RecognitionController>()
-				.SingleInstance()
-				.AsSelf();
-
-			builder
-				.RegisterType<LogController>()
-				.SingleInstance()
-				.AsSelf();
-
-			builder
-				.RegisterType<VideoPlayerController>()
-				.SingleInstance()
-				.AsSelf();
-
-			builder
-				.RegisterType<MainForm>()
-				.SingleInstance()
-				.AsSelf();
-
-			builder
-				.RegisterType<SettingsControl>()
-				.AsSelf()
-				.ExternallyOwned();
-
-			builder
-				.RegisterType<DarknetDetectorFactory>()
-				.SingleInstance()
-				.As<IDetectorFactory>();
-
-			builder
-				.RegisterType<OpenVinoDetectorFactory>()
-				.SingleInstance()
-				.As<IDetectorFactory>();
-
-			return builder.Build();
+			Application.Run(new MainForm(_logController, _videoPlayerController));
 		}
 	}
 }

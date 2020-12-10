@@ -97,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\LogController.cs" />
-    <Compile Include="Controllers\RecognitionController.cs" />
     <Compile Include="Controllers\VideoPlayerController.cs" />
     <Compile Include="Controls\LogControl.cs">
       <SubType>UserControl</SubType>
@@ -117,20 +116,12 @@
     <Compile Include="Controls\VideoPlayerControl.Designer.cs">
       <DependentUpon>VideoPlayerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Detetction\DarknetDetector.cs" />
-    <Compile Include="Detetction\DarknetDetectorFactory.cs" />
-    <Compile Include="Detetction\DetectorProvider.cs" />
-    <Compile Include="Detetction\DetectorResult.cs" />
-    <Compile Include="Detetction\IDetector.cs" />
-    <Compile Include="Detetction\IDetectorFactory.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Detetction\OpenVinoDetector.cs" />
-    <Compile Include="Detetction\OpenVinoDetectorFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\LogControl.resx">

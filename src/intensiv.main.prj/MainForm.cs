@@ -20,10 +20,7 @@ namespace Intensiv.Main
 		private VideoPlayerController _videoPlayerController;
 
 		public MainForm(LogController logController,
-			VideoPlayerController videoPlayerController,
-			RecognitionController recognitionController,
-			DetectorProvider detectorProvider,
-			SettingsControl settingsControl)
+			VideoPlayerController videoPlayerController)
 		{
 			InitializeComponent();
 
@@ -31,8 +28,8 @@ namespace Intensiv.Main
 			_videoPlayerController = videoPlayerController;
 
 			_log = new LogControl(_logController);
-			_setting = settingsControl;
-			_videoPlayer = new VideoPlayerControl(_logController, _videoPlayerController, recognitionController);
+			_setting = new SettingsControl(_logController);
+			_videoPlayer = new VideoPlayerControl(_logController, _videoPlayerController);
 
 			_pnlLog.Controls.Add(_log);
 			_pnlSettings.Controls.Add(_setting);
